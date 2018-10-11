@@ -21,7 +21,7 @@ syncTarget = [
 	"frameworks/runtime-src/proj.ios_mac/ios/net",
 	"frameworks/runtime-src/proj.ios_mac/ios/utils",
 	"src/core",
-	"src/include",
+	"src/include"
 ]
 
 syncFiles = [
@@ -38,7 +38,8 @@ syncFiles = [
 	"frameworks/runtime-src/proj.ios_mac/ios/RootViewController.mm",
 	"frameworks/runtime-src/proj.ios_mac/ios/Info.plist",
 	"main.js",
-	"src/module.js"
+	"src/module.js",
+	"src/cube/uicore/ui/NewRichText.js"
 ]
 
 for target in syncTarget:
