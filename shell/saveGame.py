@@ -21,7 +21,8 @@ syncTarget = [
 	"frameworks/runtime-src/proj.ios_mac/ios/net",
 	"frameworks/runtime-src/proj.ios_mac/ios/utils",
 	"src/core",
-	"src/include"
+	"src/include",
+	"src/cube/uicore/ui/component"
 ]
 
 syncFiles = [
@@ -48,4 +49,7 @@ for target in syncTarget:
 	
 for f in syncFiles:
 #	print os.path.join(project,f), os.path.join(targetDir,f)
-	copyFile(os.path.join(project,f), os.path.join(targetDir,f))	
+	copyFile(os.path.join(project,f), os.path.join(targetDir,f))
+	
+os.chdir(targetDir)
+os.system("gitup.py")		
