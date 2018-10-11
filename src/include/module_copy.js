@@ -1,0 +1,41 @@
+/**
+ * Created by Elendil on 2016/11/22.
+ */
+module.module_copy =
+    [
+        "src/cube/module/copy/CopyLayer.js",
+        "src/cube/module/copy/view/CopyPane.js",
+        "src/cube/module/copy/view/SecondCopyPane.js",
+        "src/cube/module/copy/view/CopyTowerPane.js",
+        "src/cube/module/copy/view/EliteBossListPane.js",
+        "src/cube/module/copy/model/CopyModel.js",
+        "src/cube/module/copy/EliteCopyLayer.js",
+        "src/cube/module/copy/view/EliteCopyPane.js",
+        "src/cube/module/copy/view/EliteCopyLevelPane.js",
+        "src/cube/module/copy/view/EliteInfoPane.js",
+        "src/cube/module/copy/view/component/EliteCopyItem.js",
+        "src/cube/module/copy/view/component/EliteCopyLevelItem.js",
+        "src/cube/module/copy/view/component/EliteBossListItem.js",
+        "src/cube/module/copy/view/component/EliteInfoItem.js",
+        "src/cube/module/copy/view/component/EliteLayout.js",
+        "src/cube/module/copy/view/component/CopyOpenTips.js",
+        "src/cube/module/copy/view/component/CopyEntryMiniLandCom.js",
+        "src/cube/module/copy/view/component/CopyEntryProgressBar.js",
+        "src/cube/module/copy/view/CopyPreview.js",
+        "src/cube/module/copy/view/component/CopyPreviewItem.js",
+        "src/cube/module/copy/view/component/CoinCopyRankItem.js",
+        "src/cube/module/copy/view/component/CopyLandCom.js",
+        "src/cube/module/copy/view/CoinCopyPane.js",
+        "src/cube/module/copy/view/CoinCopyRank.js",
+        "src/cube/module/copy/view/CopyEntryRewardPane.js",
+        "src/cube/module/copy/CoinCopyLayer.js",
+        "src/cube/module/copy/view/CopyBattleEntryLayer.js",
+
+        "src/cube/module/newCopy/model/NewCopyModel.js",
+            "src/cube/module/newCopy/view/component/CopyMap.js",
+            "src/cube/module/newCopy/view/NewCopyPane.js",
+            "src/cube/module/newCopy/view/NewCopyInfo.js",
+            "src/cube/module/newCopy/view/NewCopyReward.js",
+            "src/cube/module/newCopy/NewCopyLayer.js",
+            "src/cube/module/newCopy/view/component/CopyItem.js",
+    ]

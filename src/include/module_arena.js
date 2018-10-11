@@ -1,0 +1,46 @@
+/**
+ * Created by chenchengqi on 17/1/14.
+ */
+module.module_arena =
+    [
+        "src/cube/module/arena/home/model/ArenaModel.js",
+        "src/cube/module/arena/ArenaLayer.js",
+            "src/cube/module/arena/ArenaFightLayer.js",
+            "src/cube/module/arena/ArenaLineUpLayer.js",
+        "src/cube/module/arena/home/view/ArenaHomeView.js",
+        "src/cube/module/arena/view/ArenaPane.js",
+        "src/cube/module/arena/view/ArenaChallengePane.js",
+        "src/cube/module/arena/view/ArenaRank.js",
+        "src/cube/module/arena/view/ArenaRecord.js",
+        "src/cube/module/arena/view/ArenaShop.js",
+        "src/cube/module/arena/view/component/ArenaShopItem.js",
+        "src/cube/module/arena/view/component/ArenaHomeMapItem.js",
+        "src/cube/module/arena/view/component/ArenaSetHomeSky.js",
+         "src/cube/module/arena/view/ArenaSetHome.js",
+         "src/cube/module/arena/model/ArenaPaneModel.js",
+         "src/cube/module/arena/newView/model/NewArenaModel.js",
+        "src/cube/module/arena/view/component/ArenaRankItem.js",
+        "src/cube/module/arena/view/component/ArenaRecordItem.js",
+        "src/cube/module/arena/home/view/layer/ArenaMap.js",
+        "src/cube/module/arena/home/view/layer/ArenaContainer.js",
+        "src/cube/module/arena/home/view/layer/ArenaTitleLayer.js",
+        "src/cube/module/arena/home/view/layer/ArenaTouchLayer.js",
+        "src/cube/module/arena/home/view/component/ArenaTitle.js",
+        "src/cube/module/arena/home/view/component/ArenaCard.js",
+        "src/cube/module/arena/home/view/component/ArenaDragCard.js",
+        "src/cube/module/arena/home/view/component/ArenaLineUpList.js",
+        "src/cube/module/arena/home/view/component/ArenaLineUp.js",
+        "src/cube/module/arena/view/component/ArenaRoom.js",
+        "src/cube/module/arena/view/component/ArenaPlayerItem.js",
+        "src/cube/module/arena/view/component/ArenaDefMapOpen.js",
+        "src/cube/module/arena/home/view/ArenaEnemyView.js",
+        "src/cube/module/arena/view/ArenaDanChangeAnimationView.js",
+        "src/cube/module/arena/newView/component/NewArenaHero.js",
+        "src/cube/module/arena/newView/component/NewArenaRankItem.js",
+        "src/cube/module/arena/newView/ArenaAward.js",
+        "src/cube/module/arena/newView/NewArenaView.js",
+        "src/cube/module/arena/newView/NewArenaRankView.js",
+        "src/cube/module/arena/newView/NewArenaRankGlory.js",
+        "src/cube/module/arena/newView/NewArenaRankOneView.js"
+
+    ]

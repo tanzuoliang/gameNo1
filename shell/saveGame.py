@@ -20,6 +20,8 @@ syncTarget = [
 	"frameworks/runtime-src/proj.ios_mac/ios/app",
 	"frameworks/runtime-src/proj.ios_mac/ios/net",
 	"frameworks/runtime-src/proj.ios_mac/ios/utils",
+	"src/core",
+	"src/include",
 ]
 
 syncFiles = [
@@ -34,7 +36,9 @@ syncFiles = [
 	"frameworks/runtime-src/proj.ios_mac/ios/AppController.mm",
 	"frameworks/runtime-src/proj.ios_mac/ios/RootViewController.h",
 	"frameworks/runtime-src/proj.ios_mac/ios/RootViewController.mm",
-	"frameworks/runtime-src/proj.ios_mac/ios/Info.plist"
+	"frameworks/runtime-src/proj.ios_mac/ios/Info.plist",
+	"main.js",
+	"src/module.js"
 ]
 
 for target in syncTarget:

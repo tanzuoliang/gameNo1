@@ -1,0 +1,32 @@
+/**
+ * Created by WuBin on 2017/3/20.
+ */
+module.module_union =
+    [
+        "src/cube/module/union/UnionLayer.js",
+        "src/cube/module/union/view/UnionJoinPane.js",
+            "src/cube/module/union/view/UnionTalkPane.js",
+        "src/cube/module/union/view/UnionCreatePane.js",
+        "src/cube/module/union/view/UnionIconPane.js",
+        "src/cube/module/union/view/UnionCliffordPane.js",
+        "src/cube/module/union/view/UnionManagerPane.js",
+        "src/cube/module/union/view/UnionPane.js",
+        "src/cube/module/union/view/UnionPlayerPane.js",
+        "src/cube/module/union/view/HeroCardListView.js",
+        "src/cube/module/union/view/UnionAddPane.js",
+        "src/cube/module/union/view/component/UnionItem.js",
+        "src/cube/module/union/view/component/UnionExamineItem.js",
+        "src/cube/module/union/view/component/UnionCreatSuccess.js",
+        "src/cube/module/union/view/component/UnionAddItem.js",
+        "src/cube/module/union/view/component/UnionHeroCardItem.js",
+        "src/cube/module/union/view/component/UnionIconItem.js",
+            "src/cube/module/union/view/component/UnionCardItem.js",
+            "src/cube/module/union/view/component/UnionJoinItem.js",
+            "src/cube/module/union/view/component/UnionTalkItem.js",
+        "src/cube/module/union/view/component/UnionTalkMeItem.js",
+        "src/cube/module/union/view/component/UnionTalkResultItem.js",
+            "src/cube/module/union/view/component/UnionTalkDreamItem.js",
+        "src/cube/module/union/view/component/UnionPlayerItem.js",
+        "src/cube/module/union/view/component/UnionVSItem.js",
+        "src/cube/module/union/model/UnionModel.js",
+    ]
