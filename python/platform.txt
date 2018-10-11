@@ -1,0 +1,1 @@
+{"code":{"39":"tailand"},"desc":"enter platform 1:小米平台 2:九游uc平台 3:奇虎360平台 4:百度游戏 5:oppo 6:maple\n","pushDesc":"enter push platform 0:不集成推送sdk 1:信鸽\n","pushCode":{"0":"null","1":"xg"}}

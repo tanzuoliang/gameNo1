@@ -1,0 +1,14 @@
+**********************************************
+
+
+特别要说明的
+1.platform.txt 这个文件存放了一些平台配置 {"code":{"0":"null","1":"maple","2":"mi","3":"uc","4":"qihoo","5":"baidu","6":"nearme.gamecenter","8":"downjoy","9":"anzhi","10":"tencent","11":"lenovo"}
+ 要添加新的平台请按这上面的格式要求处理  配置的值要和 frameworks/runtime-src/proj.android/platform/ 里的平台文件夹一致
+
+2. createPng.py  合成icon     pc方和渠道方角标合在一起的程序      具体用法问给你的人
+
+3. 其它的不要管 放着就行，切记不要删除呀
+
+
+
+

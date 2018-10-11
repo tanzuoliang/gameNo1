@@ -1,0 +1,25 @@
+{
+  "DVTSourceControlWorkspaceBlueprintPrimaryRemoteRepositoryKey" : "76dbe767-7565-4752-9655-2c4c5962ac6f",
+  "DVTSourceControlWorkspaceBlueprintWorkingCopyRepositoryLocationsKey" : {
+    "76dbe767-7565-4752-9655-2c4c5962ac6f" : {
+
+    }
+  },
+  "DVTSourceControlWorkspaceBlueprintWorkingCopyStatesKey" : {
+    "76dbe767-7565-4752-9655-2c4c5962ac6f" : 9223372036854775807
+  },
+  "DVTSourceControlWorkspaceBlueprintIdentifierKey" : "3440CB82-C6D6-456D-9528-FE78F74FC8E9",
+  "DVTSourceControlWorkspaceBlueprintWorkingCopyPathsKey" : {
+    "76dbe767-7565-4752-9655-2c4c5962ac6f" : "svn\/"
+  },
+  "DVTSourceControlWorkspaceBlueprintNameKey" : "cocos2d_js_bindings",
+  "DVTSourceControlWorkspaceBlueprintVersion" : 204,
+  "DVTSourceControlWorkspaceBlueprintRelativePathToProjectKey" : "branches\/branch20170724\/cubeWar\/frameworks\/cocos2d-x\/cocos\/scripting\/js-bindings\/proj.ios_mac\/cocos2d_js_bindings.xcodeproj",
+  "DVTSourceControlWorkspaceBlueprintRemoteRepositoriesKey" : [
+    {
+      "DVTSourceControlWorkspaceBlueprintRemoteRepositoryURLKey" : "svn:\/\/192.168.1.240:3692",
+      "DVTSourceControlWorkspaceBlueprintRemoteRepositorySystemKey" : "com.apple.dt.Xcode.sourcecontrol.Subversion",
+      "DVTSourceControlWorkspaceBlueprintRemoteRepositoryIdentifierKey" : "76dbe767-7565-4752-9655-2c4c5962ac6f"
+    }
+  ]
+}
