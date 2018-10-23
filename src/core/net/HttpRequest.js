@@ -157,10 +157,10 @@ core.HttpRequest =
 
                         cc.log("[" + t.transTime + "]http结果 " + res['m'] + ":" + res['a'] + "    " + xmlhttp.responseText);
 
+                        that.saveTempModel(dataUUID,res);
+                        
                         $callback && $callback(res);
                         $callback = null;
-
-                        that.saveTempModel(dataUUID,res);
 
                     }
 

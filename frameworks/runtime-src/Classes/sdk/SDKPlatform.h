@@ -25,6 +25,8 @@ namespace sdk {
         std::string platform_desc = "";
         std::string talkingData_channel = "";
         std::string game_code_version = "";
+        
+        std::string buglyID = "53c884a523";
     };
     
     class SDKPlatform
@@ -47,6 +49,8 @@ namespace sdk {
         static SDKPlatform* getInstance();
         
         SDKPlatform();
+        
+        void InitCrashReport();
         
         void createDelay(std::function<void()>& fun,float time){
             this->hasDelay = true;

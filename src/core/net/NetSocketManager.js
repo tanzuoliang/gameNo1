@@ -62,6 +62,42 @@ core.NetSocketManager =
     }
 }
 
+
+core.HeartCheck = function (ws) {
+    this.timeout = 5000;
+    this.timeoutObj = null;
+    this.ws = ws;
+};
+
+core.HeartCheck.prototype.reset = function(){
+    clearTimeout(this.timeoutObj);
+    this.start();
+};
+
+core.HeartCheck.prototype.start =  function(){
+    var that = this;
+    this.timeoutObj = setTimeout(function(){
+        var str = { "common": "Heart", "uid": game.GameConst.getUserInfo().uid};
+        str = JSON.stringify(str);
+        cc.trace(str, "[unionChat] send heart");
+        that.ws.send(str);
+    }, this.timeout);
+};
+
+core.HeartCheck.prototype.destory = function () {
+    this.timeoutObj && clearTimeout(this.timeoutObj);
+    this.ws = null;
+};
+
+core.HeartCheck.prototype.resetWS = function (ws) {
+    this.ws = ws;
+};
+
+core.HeartCheck.create = function (ws) {
+    return new core.HeartCheck(ws);
+};
+
+
 core.NetSocket = cc.Class.extend(
 {
     socket:null,
@@ -77,6 +113,9 @@ core.NetSocket = cc.Class.extend(
     reConnectMaxTimes:20,
     curConnectTime:0,
     _messageParser:null,
+
+
+
     /**
      * 初始化
      */
@@ -86,8 +125,9 @@ core.NetSocket = cc.Class.extend(
         this.host = $url+":"+$post;
 
         this._messageParser = messageParser;
+        this.hearCheck = core.HeartCheck.create();
 
-       // this._init();
+       this._init();
     },
 
     /**
@@ -104,24 +144,28 @@ core.NetSocket = cc.Class.extend(
         this.socket.onerror = this.onError.bind(this);
         this.socket.onclose = this.onClose.bind(this);
         this.needReConnect = true;
+
+        // this.hearCheck.resetWS(this.socket);
     },
 
     onMessage:function ($evt)
     {
         var data = $evt.data;
-        cc.log('Network onMessage...' + this.host + "||message:" + data);
+        cc.log('[unionChat] Network onMessage...' + this.host + "||message:" + data);
         //core.SocketProtocolHelper.parser(data);
         this._messageParser && this._messageParser(data);
+        // this.hearCheck && this.hearCheck.reset();
     },
 
     onError:function ($evt)
     {
-        cc.log('Network onError...' + this.host);
+        cc.log('[unionChat] Network onError...' + this.host);
     },
 
     onClose:function ($evt)
     {
-        cc.log('Network onClose...' + this.host);
+        cc.log('[unionChat]Network onClose...' + this.host);
+        this.socket.close();
         this.isInit = false;
         this.CELAN_EVENT();
         this.socket = null;
@@ -139,14 +183,15 @@ core.NetSocket = cc.Class.extend(
         {
             this.curConnectTime ++;
             cc.log('Network ReConnect...' + this.host);
-            setTimeout(this._init.bind(this),500);
+            // setTimeout(this._init.bind(this),500);
+            setTimeout(this._init.bind(this),this.curConnectTime * 1000);
             // this._init();
         }
     },
 
     onOpen:function ($evt)
     {
-        cc.log('Network onOpen...' + this.host);
+        cc.log('[unionChat] Network onOpen...' + this.host);
 
          //eventBus.EventBusByJs.dispatchEvent("reConnect_success",null);
 
@@ -156,6 +201,8 @@ core.NetSocket = cc.Class.extend(
         {
             this._send();
         }
+
+        // this.hearCheck && this.hearCheck.start();
     },
 
     /**
@@ -169,7 +216,6 @@ core.NetSocket = cc.Class.extend(
                 this.dataPool.push($data);
                 this._send();
             }
-            cc.trace($data, "send$data");
             cc.log("###send");
         }else{
             // alert.AlertLayer.create(alert.AlertLayer.ALERT_TYPE_CONFIRM,
@@ -194,7 +240,9 @@ core.NetSocket = cc.Class.extend(
             if(this.socket.readyState == WebSocket.OPEN)
             {
                 var sendData = this.dataPool.shift();
+                cc.trace(sendData, "[unionChat]send$data");
                 this.socket.send(sendData);
+
             }else
             {
                 cc.log('Network WebSocket readState:'+this.socket.readyState);

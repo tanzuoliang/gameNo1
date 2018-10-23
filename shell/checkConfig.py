@@ -327,6 +327,7 @@ def check3D():
 					
 			actionName = ls[1].split(".")[0]
 			modeldic[heroName].append(actionName)
+			
 #	print json.dumps(modeldic,indent=2)	
 	normalAction = ["attack","chuchang","die","idle","move","skill","run","run_attack","bao"]
 	for m in modeldic:
@@ -442,21 +443,19 @@ def checkSkill():
 			if not isInvalid(e) and not e in eConfig:
 				effErr.append("[error] %s can not find the skill eff %s in cubewar_eff_config %s"%(key,e,item["eff"]))
 #				print "[error] ",key," can not find the skill eff ",e," in cubewar_eff_config ",item["eff"]
-				
-		n = item["name"]
-		if not isInvalid(n) and "skillname" in n and not n in lConfig:
-			errLs.append("[error] skill %s  can not find the  %s in cubewar_lang_cn"%(key,n))
-#			print "[error] ",key," can not find the name ",n," in cubewar_lang_cn"
-		
-		intro = item["intro"]
-		if not isInvalid(intro) and "skillinfo" in intro and not n in lConfig:
-			errLs.append("[error] skill %s  can not find the  %s in cubewar_lang_cn"%(key,intro))
-#			print "[error] ",key," can not find the intro ",intro," in cubewar_lang_cn"
+		if key.startswith("10"):		
+			n = item["name"]
+			if not isInvalid(n) and "skillname" in n and not n in lConfig:
+				errLs.append("[error] skill %s  can not find the  %s in cubewar_lang_cn"%(key,n))
+
+			intro = item["intro"]
+			if not isInvalid(intro) and "skillinfo" in intro and not intro in lConfig:
+				errLs.append("[error] skill %s  can not find the  %s in cubewar_lang_cn"%(key,intro))
 			
 			
 		icon = str(item["oid"])
 #		print item["oid"]
-		if icon[0:2] == "10" and not icon in iconPlist:
+		if icon.startswith("10") and not icon in iconPlist:
 			print "[error] ",key," can not find the icon named skill_" + icon + ".png in skillIcon.plist "
 			
 		add_state = str(item["add_state"])
@@ -554,20 +553,22 @@ def findItem(item_id):
 	if not item_id in config["cubewar_item_info"]:
 		print "err can not find ",item_id
 					
-#startCheck()
+startCheck()
 #checkGameSound()
-checkWhat();
+#checkWhat();
+#check3D()
+#checkSkill()
 			
 
-def checkSkill(id):
-	con = config["cubewar_skill_info"][id]
-	print con
-	ls = ["achieve","add_state","area_des","att_type","cd","hp_pro","hurt","key","trigger"]
-	for key in ls:
-		if key in con:
-			print key , " = " , con[key]
-		else:
-			print "can not find the ",key	
+#def checkSkill(id):
+#	con = config["cubewar_skill_info"][id]
+#	print con
+#	ls = ["achieve","add_state","area_des","att_type","cd","hp_pro","hurt","key","trigger"]
+#	for key in ls:
+#		if key in con:
+#			print key , " = " , con[key]
+#		else:
+#			print "can not find the ",key	
 			
 			
 def removeUnusedHeroResource():

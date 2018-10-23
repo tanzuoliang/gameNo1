@@ -20,7 +20,7 @@ http://192.168.1.240:8889/gateway.php?rolename=tianYi1326&uid=0&a=create&m=Login
 uid = 0
 sid = ""
 
-OUT_NET = True
+OUT_NET = False
 
 HOST = "http://192.168.1.240"
 rootURL = "%s:8889/gateway.php"%HOST

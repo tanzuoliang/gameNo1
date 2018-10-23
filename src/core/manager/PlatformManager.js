@@ -107,7 +107,7 @@ core.PlatformManager =
         //cc.sys.localStorage.removeItem("tempAccid");
         //cc.sys.localStorage.removeItem("tempToken");
 
-        cc.log(" loginSDKSussess1 " + jsonInfo.str());
+        cc.log(" loginSDKSussess1 " + JSON.stringify(jsonInfo));
 
         cc.log("---------- loginSDKSussess1 this.accid = " + this.accid + " , this.token = " + this.token);
         this.loginSuccessCallBack && this.loginSuccessCallBack();

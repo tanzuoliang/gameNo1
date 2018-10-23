@@ -334,6 +334,8 @@ var component = component || {};
             //     this.scroll.addEventListener(this.onScrolling.bind(this));
             // }
 
+            this.isRevert = config.revert || false;
+
             if(config.hasOwnProperty("data")){
                 this.setTableData(config.data);
             }
@@ -385,6 +387,12 @@ var component = component || {};
           this._super();
           // this.scheduleUpdate();
           // this.initItem();
+
+            // if(this.dir ==ccui.ScrollView.DIR_VERTICAL){
+            //     if(this.isRevert){
+            //         this.scroll.jumpToBottom();
+            //     }
+            // }
         },
 
 
@@ -464,6 +472,9 @@ var component = component || {};
                 this.currentSelectItem = null;
             }
 
+
+            // this.scroll && this.scroll.unscheduleAllCallbacks();
+
             this.tableData = data;
             var len = this.itemsArr.length;
             if(len > 0){
@@ -499,9 +510,16 @@ var component = component || {};
 
 
                 this.scroll.setInnerContainerSize(this.worldSize);
+                if(this.dir ==ccui.ScrollView.DIR_VERTICAL){
+                    if(this.isRevert){
+                        this.scroll.jumpToBottom();
+                    }else{
+                        this.scroll.jumpToTop();
+                    }
+                }
 
                 cc.log("totalRows = " + this.totalRows + " , totalCols = " + this.totalCols);
-                cc.log("this.worldSize width = " + this.worldSize.width + " , height = " + this.worldSize.height);
+                cc.log("this.worldSize width = " + this.worldSize.width + " , height = " + this.worldSize.height + " v = " + JSON.stringify(this.scroll.getInnerContainerPosition()));
 
 
             }
@@ -533,6 +551,30 @@ var component = component || {};
             return cc.rectContainsPoint(this.scrollBoundRect,pos);
         },
 
+        instanceItem : function (x,y,row,col,index) {
+            var item =   cc.pool.getFromPool(this.itemRender);
+            item.initConfig({
+                viewSize                : this.itemSize,
+                checkTouchInScrollView  : this.checkTouchInScrollView.bind(this),
+                onSelectCallFunc        : this.onSelectItem.bind(this),
+                showType                : this.showType,
+                showTime                : this.showTime
+            });
+
+            item.x = x;
+            item.y = y;
+            item.__col__ = col;
+            item.__row__ = row;
+            item.setData && item.setData(this.tableData[index],index);
+            this.scroll.addChild(item);
+            this.itemsArr[this.itemsArr.length] = item;
+
+            cc.log("[baseItem] x = " + x + "  y = " + y + " row = " + row + "  col = " + col + " index = " + index + " visible = " + item.visible);
+
+            return index;
+
+        },
+
         initItem_H : function () {
             cc.log("[tableView ] size = " + this.tableData.length);
             if(!this.tableData)return;
@@ -545,32 +587,41 @@ var component = component || {};
             loop:
                 for(var i = 0; i < cols; i++){
                     for(var j = 0 ; j < this.viewRows;j++){
-                        // item = new this.itemRender();
-                        item = cc.pool.getFromPool(this.itemRender);
-                        item.initConfig({
-                            viewSize                : this.itemSize,
-                            checkTouchInScrollView  : this.checkTouchInScrollView.bind(this),
-                            onSelectCallFunc        : this.onSelectItem.bind(this),
-                            showType                : this.showType,
-                            showTime                : this.showTime
-                        });
 
-                        item.x = i * this.itemSize.width;
-                        item.y = this.worldSize.height - (j + 1) * this.itemSize.height - this.extraSpace;
-                        item.__col__ = i;
-                        item.__row__ = j;
-                        index = item.__row__ + item.__col__ * this.viewRows;
-                        console.log("item.x + " + item.x + " item.y = " + item.y +  " , index = " + index + " , tot = " + datalen);
-                        item.setData && item.setData(this.tableData[index],index);
-
-                        this.scroll.addChild(item);
-                        this.itemsArr[this.itemsArr.length] = item;
-
+                        // index = j + item.__col__ * i;
+                        index = j + i * this.viewRows;;
+                        this.instanceItem(i * this.itemSize.width,this.worldSize.height - (j + 1) * this.itemSize.height - this.extraSpace,j,i,index);
                         if(index + 1 == datalen){
                             break loop;
                         }
+
+                        // item = cc.pool.getFromPool(this.itemRender);
+                        // item.initConfig({
+                        //     viewSize                : this.itemSize,
+                        //     checkTouchInScrollView  : this.checkTouchInScrollView.bind(this),
+                        //     onSelectCallFunc        : this.onSelectItem.bind(this),
+                        //     showType                : this.showType,
+                        //     showTime                : this.showTime
+                        // });
+                        //
+                        // item.x = i * this.itemSize.width;
+                        // item.y = this.worldSize.height - (j + 1) * this.itemSize.height - this.extraSpace;
+                        // item.__col__ = i;
+                        // item.__row__ = j;
+                        //
+                        // console.log("item.x + " + item.x + " item.y = " + item.y +  " , index = " + index + " , tot = " + datalen);
+                        // item.setData && item.setData(this.tableData[index],index);
+                        //
+                        // this.scroll.addChild(item);
+                        // this.itemsArr[this.itemsArr.length] = item;
+                        //
+                        // if(index + 1 == datalen){
+                        //     break loop;
+                        // }
                     }
                 }
+
+            // this.scroll.jumpToLeft();
 
             if(this.defaultIndex < this.itemsArr.length){
                 this.currentSelectItem = this.itemsArr[this.defaultIndex];
@@ -599,35 +650,64 @@ var component = component || {};
             var item = null;
             var index = -1;
             // cc.log("tableView initItem data = " + JSON.stringify(this.tableData))
-            loop:
-                for(var i = 0; i < rows; i++){
-                    for(var j = 0 ; j < this.viewCols;j++){
-                        // item = new this.itemRender();
-                        item = cc.pool.getFromPool(this.itemRender);
-                        item.initConfig({
-                            viewSize                : this.itemSize,
-                            checkTouchInScrollView  : this.checkTouchInScrollView.bind(this),
-                            onSelectCallFunc        : this.onSelectItem.bind(this),
-                            showType                : this.showType,
-                            showTime                : this.showTime
-                        });
 
-                        item.x = j * this.itemSize.width;
-                        item.y = this.worldSize.height - (i + 1) * this.itemSize.height - this.extraSpace;
-                        // console.log("item.y = " + item.y +  " , len = " + (i * this.viewCols + j + 1) + " , tot = " + datalen);
-                        item.__col__ = j;
-                        item.__row__ = i;
-                        index = item.__row__ * this.viewCols + item.__col__;
-                        item.setData && item.setData(this.tableData[index],index);
 
-                        this.scroll.addChild(item);
-                        this.itemsArr[this.itemsArr.length] = item;
-
-                        if((i * this.viewCols + j + 1) == datalen){
-                            break loop;
+            if(this.isRevert){
+                var endRows = Math.max(0,this.totalRows - this.viewRows - 1);
+                cc.log("[baseItem] rows = " + rows + " ,end = " + endRows);
+                loop:
+                    for(var i = this.totalRows - 1 ; i >= endRows; i--) {
+                        for (var j = this.viewCols - 1; j >= 0; j--) {
+                            index = i * this.viewCols + j;
+                            if (index < datalen) {
+                                this.instanceItem(j * this.itemSize.width, this.worldSize.height - (i + 1) * this.itemSize.height - this.extraSpace, i, j, index);
+                            }
                         }
                     }
-                }
+
+                // this.scroll.jumpToBottom();
+                // this.scroll.getInnerContainerPosition().y = 0;
+            }else{
+
+                loop:
+                    for(var i = 0; i < rows; i++){
+                        for(var j = 0 ; j < this.viewCols;j++){
+                            index  = i * this.viewCols + j;
+                            this.instanceItem(j * this.itemSize.width,this.worldSize.height - (i + 1) * this.itemSize.height - this.extraSpace,i,j,index);
+                            if(index + 1 == datalen){
+                                break loop;
+                            }
+
+                            // item = cc.pool.getFromPool(this.itemRender);
+                            // item.initConfig({
+                            //     viewSize                : this.itemSize,
+                            //     checkTouchInScrollView  : this.checkTouchInScrollView.bind(this),
+                            //     onSelectCallFunc        : this.onSelectItem.bind(this),
+                            //     showType                : this.showType,
+                            //     showTime                : this.showTime
+                            // });
+                            //
+                            // item.x = j * this.itemSize.width;
+                            // item.y = this.worldSize.height - (i + 1) * this.itemSize.height - this.extraSpace;
+                            // // console.log("item.y = " + item.y +  " , len = " + (i * this.viewCols + j + 1) + " , tot = " + datalen);
+                            // item.__col__ = j;
+                            // item.__row__ = i;
+                            // index = item.__row__ * this.viewCols + item.__col__;
+                            // item.setData && item.setData(this.tableData[index],index);
+                            //
+                            // this.scroll.addChild(item);
+                            // this.itemsArr[this.itemsArr.length] = item;
+                            //
+                            // if((i * this.viewCols + j + 1) == datalen){
+                            //     break loop;
+                            // }
+                        }
+                    }
+
+                // this.scroll.jumpToTop();
+            }
+
+
 
             if(this.defaultIndex < this.itemsArr.length){
                 this.currentSelectItem = this.itemsArr[this.defaultIndex];
@@ -644,7 +724,7 @@ var component = component || {};
 
             // cc.log("[item] ---------------------------------------------------- " + (this.viewSize.height -
 
-            //cc.log("[tableView]  view:height = " + this.viewSize.height + " , worldSize:height = " + this.worldSize.height + " this.lastInnserPosY = " + this.lastInnerPosY);
+            cc.log("[baseItem]  view:height = " + this.viewSize.height + " , worldSize:height = " + this.worldSize.height + " this.lastInnserPosY = " + this.lastInnerPosY);
         },
 
         onSelectItem : function (item,data) {
@@ -663,8 +743,10 @@ var component = component || {};
         //-------------------------------------
         onExit : function () {
             this._super();
-            this.itemsArr = null;
+            // this.itemsArr = null;
+            this.itemsArr.length = 0;
             this.tableData = null;
+            this.onSelectCallFunc = null;
 
             // this.unscheduleUpdate();
 
@@ -796,6 +878,7 @@ var component = component || {};
             this.listener && cc.eventManager.removeListener(this.listener);
             this.listener = null;
             this.checkTouchInScrollView = null;
+            this.onSelectCallFunc = null;
         },
 
         /**

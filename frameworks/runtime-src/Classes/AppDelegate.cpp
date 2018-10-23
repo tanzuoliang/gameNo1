@@ -58,6 +58,7 @@
 #include "BuglyJSAgent.h"
 #endif
 
+
 USING_NS_CC;
 using namespace CocosDenshion;
 
@@ -96,7 +97,8 @@ bool AppDelegate::applicationDidFinishLaunching()
 {
 #if CC_TARGET_PLATFORM == CC_PLATFORM_ANDROID || CC_TARGET_PLATFORM == CC_PLATFORM_IOS
     // Init the Bugly
-    CrashReport::initCrashReport("53c884a523", true);
+//    CrashReport::initCrashReport("53c884a523", true);
+    sdk::SDKPlatform::getInstance()->InitCrashReport();
 #endif
 
     

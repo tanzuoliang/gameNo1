@@ -218,8 +218,8 @@ if __name__ == '__main__':
 
 			"""
 			if compileMode == "1":
-				os.system('cocos compile -p android -m release --no-apk True')
-#				os.system('cocos compile -p android --no-apk True')
+				os.system('cocos compile -p android -m release --no-apk True')#release
+#				os.system('cocos compile -p android --no-apk True')#debug
 				copyDir("frameworks/runtime-src/proj.android/libs/armeabi","frameworks/runtime-src/proj.android-studio/app/ibs/armeabi")
 			elif compileMode == '2':
 				"""

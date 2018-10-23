@@ -19,6 +19,7 @@ module.module_alert =
          "src/cube/alert/view/ItemTips.js",
         "src/cube/alert/view/GuideMask.js",
         "src/cube/alert/view/GameAllBuff.js",
+        "src/cube/alert/view/EnergyBuyAlert.js",
         "src/cube/alert/model/AlertModel.js",
         "src/cube/alert/view/DreamAlert.js",
          "src/cube/alert/view/component/DreamAlertItem.js",

@@ -44,7 +44,8 @@ core.UpdateManager =
     {
         cc.director.getScheduler().performFunctionInCocosThread(function ()
             {
-                this.updateScene.popupNotice();
+                // this.updateScene.popupNotice();
+                this.updateScene.startCheck();
             }.bind(this));
 
     },

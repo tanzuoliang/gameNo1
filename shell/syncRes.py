@@ -83,10 +83,35 @@ def check(_fr,_to):
 		if ba in lefts:
 			same.append(ba)	
 			
-	print json.dumps(same,indent=2)		
+	print json.dumps(same,indent=2)	
+	
+	
+
+	
+def removeFilesByCompareTarget(_from,target,backup="../res_backup"):
+	def checkDir(f):
+		ls = f.split("/")
+		p = backup
+		for i in range(0,len(ls) - 1):
+			p = os.path.join(p,ls[i])
+			if not os.path.exists(p):
+				os.mkdir(p)
+	
+	for (root,_,items) in os.walk(_from):
+		if items:
+			for item in items:
+				fullPath = os.path.join(root,item)
+				checkPath = fullPath.replace(_from,target)
+				print fullPath,os.path.join(backup,fullPath.replace("../",""))
+				if not os.path.exists(checkPath):
+					print checkPath
+					checkDir(fullPath.replace("../",""))
+					os.system("cp %s %s"%(fullPath,os.path.join(backup,fullPath.replace("../",""))))
+					os.system("svn del %s"%fullPath)		
 			
 if __name__ == "__main__":
 	print "already"
+	removeFilesByCompareTarget("../res-","../res-check")
 #	app = SyncMachine()
 #	app.removeUnuseRes()
 #	check("../res/CN/new_ui/module/main_bottom_menu","../res/CN/new_ui/common/icon")					

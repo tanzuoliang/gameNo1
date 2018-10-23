@@ -42,7 +42,7 @@ function toClient(msg,response) {
 	response.end(msg);
 }
 
-var WHITE_IPS = new Set(["192.168.1.198","127.0.0.1"]);
+var WHITE_IPS = new Set(["192.168.1.198","127.0.0.1","192.168.1.145","192.168.1.170"]);
 
 function isValidIP(ip){
 	ip = ip.split("f:")[1];

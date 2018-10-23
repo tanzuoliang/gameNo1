@@ -14,6 +14,12 @@
      * 关于居中分配公式   (offsetWidth - (size - anchor * 2) * width) * 0.5;
      * 旋转   cosa   -sina    x
      *       sina   cosa      y
+     *
+     *
+     *       (index - size + 1 - ( 0.5 - anchor) * 2) * 0.5 * width
+     *       (offsetWidth +  2 * index  + anchor * 2 - size) * width * 0.5   + center.x    //anchor * 2 - size is const
+     *
+     *
      */
     
     /**

@@ -938,7 +938,7 @@ cc.game.onStart = function(){
             core.UpdateManager.setUseClass(onlineUpdate.CubeUpdateScene,onlineUpdate.CubeUpdateLayer);
             core.NoticManager.setParserCallback(uicore.NoticeProctol.parse);
 
-            game.GameConst.testUid = 142;
+            game.GameConst.testUid = 178;
 
             cc.director.runScene(new main.MainScene());
 

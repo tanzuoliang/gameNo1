@@ -34,7 +34,14 @@
 //#include "TDCCAccount.h"
 #endif
 
-
+// 导入Bugly头文件 CrashReport.h
+#if (CC_TARGET_PLATFORM == CC_PLATFORM_ANDROID)
+#include "bugly/CrashReport.h"
+#include "bugly/js/BuglyJSAgent.h"
+#elif (CC_TARGET_PLATFORM == CC_PLATFORM_IOS)
+#include "CrashReport.h"
+#include "BuglyJSAgent.h"
+#endif
 
 #define ANDROID_PLATFROM_JAVA           "org/cocos2dx/javascript/platform/PlatformManager"
 
@@ -53,6 +60,11 @@ namespace sdk {
         }
         
         return _instance;
+    }
+    
+    void SDKPlatform::InitCrashReport(){
+        
+        CrashReport::initCrashReport(platform->buglyID.c_str(), strcmp(platform->buglyID.c_str(), "53c884a523") == 0 ? true : false);
     }
     
     SDKPlatform::SDKPlatform()
@@ -75,7 +87,7 @@ namespace sdk {
         }
         else
         {
-//            platform->platform_name=  cocostudio::DictionaryHelper::getInstance()->getStringValue_json(doc, "platform_name");
+            platform->buglyID =  cocostudio::DictionaryHelper::getInstance()->getStringValue_json(doc, "buglyID","53c884a523");
 //            platform->platform_version=  cocostudio::DictionaryHelper::getInstance()->getStringValue_json(doc, "platform_name");
 //            platform->platform_type=  cocostudio::DictionaryHelper::getInstance()->getIntValue_json(doc, "platform_type");
 //            platform->platform_desc=  cocostudio::DictionaryHelper::getInstance()->getStringValue_json(doc, "platform_desc");
